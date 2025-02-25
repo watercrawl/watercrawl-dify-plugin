@@ -46,8 +46,8 @@ then in the Dify plugin management page, go to `Plugins` and click on the `+ Ins
 
 ## Contributing / Development  
 To contribute to the WaterCrawl plugin, follow these steps:
-1. Clone the repository (optional): `git clone https://github.com/watercrawl/watercrawl-dify-plugin.git`
-2. Navigate to the project directory (if cloned): `cd watercrawl`
+1. Clone the repository: `git clone https://github.com/watercrawl/watercrawl-dify-plugin.git`
+2. Navigate to the project directory: `cd watercrawl-dify-plugin`
 3. Make virtual environment: `python -m venv env`
 4. Activate the virtual environment: `source env/bin/activate`
 5. Install dependencies: `pip install -r requirements.txt`
