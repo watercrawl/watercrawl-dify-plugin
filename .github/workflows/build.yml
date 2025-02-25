@@ -6,6 +6,9 @@ on:
       - 'v*'  # Triggers on version tags (e.g., v1.0)
   workflow_dispatch:
 
+permissions:
+  contents: write  # Allows the workflow to create releases
+
 jobs:
   build:
     runs-on: ubuntu-latest
