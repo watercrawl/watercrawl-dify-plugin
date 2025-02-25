@@ -21,6 +21,8 @@ jobs:
 
       - name: Package the plugin
         run: |
+          pwd
+          ls
           /tmp/dify plugin package ./water-crawl
 
       - name: Create Release Notes
