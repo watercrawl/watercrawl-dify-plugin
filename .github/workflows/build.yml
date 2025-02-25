@@ -16,13 +16,13 @@ jobs:
 
       - name: Download Dify Plugin Daemon
         run: |
-          wget https://github.com/langgenius/dify-plugin-daemon/releases/download/0.0.2/dify-plugin-linux-amd64 -O /usr/bin/dify
-          chmod +x /usr/bin/dify
+          wget https://github.com/langgenius/dify-plugin-daemon/releases/download/0.0.2/dify-plugin-linux-amd64 -O /tmp/dify
+          chmod +x /tmp/dify
 
       - name: Package the plugin
         run: |
           cd ./water-crawl
-          /usr/bin/dify plugin package ./water-crawl
+          /tmp/dify plugin package ./water-crawl
 
       - name: Create Release Notes
         id: create_release_notes
