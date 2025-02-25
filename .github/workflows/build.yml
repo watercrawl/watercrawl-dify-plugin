@@ -12,6 +12,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # ✅ Required for creating releases
 
     steps:
       - name: Checkout code
@@ -27,21 +29,20 @@ jobs:
           cd /home/runner/work/watercrawl-dify-plugin && /tmp/dify plugin package ./watercrawl-dify-plugin
           
       - name: Create Release Notes
-        id: create_release_notes
         run: |
           echo "## Release Notes" > release_notes.md
-          echo "" >> release_notes.md
           cat CHANGELOG.md >> release_notes.md
-          echo "" >> release_notes.md
 
       - name: Create GitHub Release
-        id: create_release
+        id: create_release  # ✅ This step now has an ID
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body_path: release_notes.md
-          token: ${{ secrets.GITHUB_TOKEN }}  # ✅ Must be inside `with:`
+          token: ${{ secrets.GITHUB_TOKEN }}  # ✅ Using built-in token
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload .difypkg file
         uses: actions/upload-release-asset@v1
@@ -50,3 +51,5 @@ jobs:
           asset_path: /home/runner/work/watercrawl-dify-plugin/watercrawl-dify-plugin.difypkg
           asset_name: watercrawl-dify-plugin-${{ github.ref_name }}.difypkg
           asset_content_type: application/octet-stream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
