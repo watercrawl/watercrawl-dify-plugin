@@ -36,9 +36,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}  
+          name: Release ${{ github.ref_name }}
           body_path: release_notes.md
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}  # ✅ Must be inside `with:`
 
       - name: Upload .difypkg file
         uses: actions/upload-release-asset@v1
