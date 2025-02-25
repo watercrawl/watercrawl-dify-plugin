@@ -1,6 +1,6 @@
 # WaterCrawl Plugin
 
-**Author:** WaterCrawl  
+**Author:** watercrawl  
 **Version:** 0.3.0  
 **Type:** Tool  
 

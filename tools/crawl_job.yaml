@@ -8,7 +8,7 @@ extra:
   python:
     source: tools/crawl_job.py
 identity:
-  author: hjlarry
+  author: watercrawl
   label:
     en_US: Crawl Job
     zh_Hans: 爬取任务处理

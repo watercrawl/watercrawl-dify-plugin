@@ -12,7 +12,7 @@ extra:
   python:
     source: tools/crawl.py
 identity:
-  author: WaterCrawl
+  author: watercrawl
   label:
     en_US: Crawl
     zh_Hans: 深度爬取
