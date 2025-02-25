@@ -36,8 +36,8 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./water-crawl/water-crawl.difypkg
-          asset_name: water-crawl-v0-3-0.difypkg
+          asset_path: /home/runner/work/watercrawl-dify-plugin/watercrawl-dify-plugin.difypkg
+          asset_name: watercrawl-dify-plugin-${{ github.ref }}.difypkg
           asset_content_type: application/octet-stream
 
       - name: Create GitHub Release
