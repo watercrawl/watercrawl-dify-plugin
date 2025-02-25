@@ -1,0 +1,80 @@
+identity:
+  name: WaterCrawlScrap
+  author: WaterCrawl
+  label:
+    en_US: Scrap Single URL
+description:
+  human:
+    en_US: Transform a url to LLM ready text
+  llm: This tool is designed to scrap a single URL and output the content in selected format. The format can be markdown, html, json, or screenshot. If you choose screenshot, the output will be a screenshot of the page.
+parameters:
+  - form: llm
+    name: url
+    type: string
+    required: true
+    label:
+      en_US: URL
+    human_description:
+      en_US: Enter the URL you want to scrap
+    llm_description: The URL of the website that needs to be crawled. This is a required parameter.
+
+  - form: llm
+    name: format
+    type: select
+    options:
+      - label:
+          en_US: Markdown
+        value: markdown
+      - label:
+          en_US: HTML
+        value: html
+      - label:
+          en_US: JSON
+        value: json
+      - label:
+          en_US: Screenshot
+        value: screenshot
+    default: markdown
+    required: false
+    label:
+      en_US: Format
+    human_description:
+      en_US: Choose the format of the output
+    llm_description: The format of the output, such as markdown, html, or json. if you choose screenshot, the output will be a screenshot of the page. try to use markdown for most of the time.
+
+  - form: llm
+    name: include_links
+    type: boolean
+    default: false
+    required: false
+    label:
+      en_US: Include links
+    human_description:
+      en_US: Include links in the output
+    llm_description: Whether to include links in the output this link extracted from the page.
+
+  - form: form
+    name: timeout
+    type: number
+    default: 15000
+    required: false
+    label:
+      en_US: Timeout
+    human_description:
+      en_US: Set the timeout for the request
+    llm_description: The timeout for the request, in milliseconds. Default is 300ms.
+
+  - form: form
+    name: wait_time
+    type: number
+    default: 1000
+    required: false
+    label:
+      en_US: Wait Timeout
+    human_description:
+      en_US: After opening the page, wait for the page to load for the specified time
+    llm_description: The timeout for waiting for the page to load, in milliseconds. Default is 1000ms.
+
+extra:
+  python:
+    source: tools/scrap.py

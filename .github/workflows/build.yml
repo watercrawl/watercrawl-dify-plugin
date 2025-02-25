@@ -1,0 +1,49 @@
+name: Build WaterCrawl Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on version tags (e.g., v1.0)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download Dify Plugin Daemon
+        run: |
+          wget https://github.com/langgenius/dify-plugin-daemon/releases/download/0.0.2/dify-plugin-linux-amd64 -O /usr/bin/dify
+          chmod +x /usr/bin/dify
+
+      - name: Package the plugin
+        run: |
+          cd ./water-crawl
+          /usr/bin/dify plugin package ./water-crawl
+
+      - name: Create Release Notes
+        id: create_release_notes
+        run: |
+          echo "## Release Notes" > release_notes.md
+          echo "" >> release_notes.md
+          cat CHANGELOG.md >> release_notes.md
+          echo "" >> release_notes.md
+
+      - name: Upload .difypkg file
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./water-crawl/water-crawl.difypkg
+          asset_name: water-crawl-v0-3-0.difypkg
+          asset_content_type: application/octet-stream
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: $(cat release_notes.md)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,38 @@
+version: 0.3.0
+type: plugin
+author: watercrawl
+name: watercrawl
+label:
+  en_US: WaterCrawl
+  zh_Hans: WaterCrawl
+description:
+  en_US: WaterCrawl is a smart web crawling tool. with this plugin, you can easily crawl websites and extract data from them. this plugin is compatible with WaterCrawl v0.3.*
+  zh_Hans: WaterCrawl 是一个智能的网页爬取工具，使用这个插件，你可以轻松地爬取网站，从中提取数据。这个插件与 WaterCrawl v0.3.* 兼容。
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    endpoint:
+      enabled: true
+    storage:
+      enabled: true
+      size: 1048576
+tags:
+  - search
+  - utilities
+plugins:
+  tools:
+    - provider/water-crawl.yaml
+meta:
+  version: 0.3.0
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-02-24T00:25:29.331839+01:00
+privacy: PRIVACY.md
