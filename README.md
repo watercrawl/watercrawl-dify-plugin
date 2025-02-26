@@ -1,7 +1,7 @@
 # WaterCrawl Plugin
 
 **Author:** watercrawl  
-**Version:** 0.3.0  
+**Version:** 0.3.1  
 **Type:** Tool  
 
 <img src="./_assets/Introduction.png" width="300">
