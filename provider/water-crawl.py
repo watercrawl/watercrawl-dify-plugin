@@ -33,7 +33,7 @@ class WaterCrawlProvider(ToolProvider):
 
     def validate_url(self, url):
         try:
-            regex = r"^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
+            regex = r"^(https?:\/\/)?(([\da-z\.-]+)\.([a-z\.]{2,6})|(\d{1,3}\.){3}\d{1,3})([\/\w \.-]*)*\/?$"
             return url if bool(re.match(regex, url)) else None
         except Exception:
             return False
