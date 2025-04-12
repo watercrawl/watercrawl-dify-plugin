@@ -1,4 +1,5 @@
 import re
+import validators
 from typing import Any
 
 from dify_plugin import ToolProvider
@@ -33,7 +34,6 @@ class WaterCrawlProvider(ToolProvider):
 
     def validate_url(self, url):
         try:
-            regex = r"^(https?:\/\/)?(([\da-z\.-]+)\.([a-z\.]{2,6})|(\d{1,3}\.){3}\d{1,3})([\/\w \.-]*)*\/?$"
-            return url if bool(re.match(regex, url)) else None
+            return url if bool(validators.url(url)) else None
         except Exception:
             return False
