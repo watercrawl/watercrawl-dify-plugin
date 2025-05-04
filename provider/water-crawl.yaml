@@ -10,9 +10,12 @@ identity:
     ja_JP: WaterCrawlはスマートなウェブクローリングツールです。このプラグインを使えば、ウェブサイトを簡単にクロールし、データを抽出することができます。WaterCrawl バージョン0.3.*に対応しています。
   icon: icon.svg
 tools:
-  - tools/scrap.yaml
+  - tools/scrape.yaml
   - tools/crawl.yaml
   - tools/crawl_job.yaml
+  - tools/search.yaml
+  - tools/search_job.yaml
+  - tools/sitemap.yaml
 extra:
   python:
     source: provider/water-crawl.py
@@ -44,4 +47,4 @@ credentials_for_provider:
       ja_JP: API keyを記入してください
     required: true
     type: secret-input
-    url: https://watercrawl.dev/
+    url: https://github.com/watercrawl/watercrawl-dify-plugin/blob/main/README.md#authentication

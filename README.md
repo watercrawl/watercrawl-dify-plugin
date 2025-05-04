@@ -1,21 +1,21 @@
 # WaterCrawl Plugin
 
 **Author:** watercrawl  
-**Version:** 0.3.1  
+**Version:** 0.4.0
 **Type:** Tool  
 
 <img src="./_assets/Introduction.png" width="300">
 
 ### Description  
-WaterCrawl is a powerful web crawling tool designed for developers. This plugin allows you to easily crawl websites and extract data from them. It is compatible with WaterCrawl v0.3.* and offers a range of features for efficient data extraction.
+WaterCrawl is a powerful web crawling tool designed for developers. This plugin allows you to easily crawl websites, extract data, and search the web. It is compatible with WaterCrawl v0.4.* and offers a range of features for efficient data extraction and discovery.
 
 ## Features  
-#### **Scrap Tool**:
-Scrapes a single URL and outputs the content in various formats (markdown, HTML, JSON, or screenshot).  
+#### **Scrape Tool**:
+Scrapes a single URL and outputs the content in markdown format with options for including HTML, links, and screenshots.  
 
 
-| <img src="./_assets/Scrap-params.png" width="300"> | <img src="./_assets/Scrap-settings.png" width="300"> |
-| --- | --- |
+| <img src="./_assets/Scrape-params.png" width="300"> | <img src="./_assets/Scrape-settings.png" width="300"> |
+|-----------------------------------------------------|-------------------------------------------------------|
 
 
 #### **Crawl Tool**:
@@ -29,6 +29,21 @@ Initiates a web crawl to extract data from specified URLs with configurable opti
 Retrieve scraping results based on a crawl request UUID and cancel ongoing scraping tasks.  
 
 <img src="./_assets/Crawl-job-params.png" width="300">
+
+### **Search Tool**:
+Search the web for information using WaterCrawl's search API with configurable options for language, country, time range, and search depth.
+
+<img src="./_assets/Search-params.png" width="300">
+
+### **Search Job Tool**:
+Retrieve search results or manage search jobs based on a search request UUID. Monitor progress or cancel search tasks as needed.
+
+<img src="./_assets/Search-job-params.png" width="300">
+
+### **Sitemap Tool**:
+Retrieve a sitemap from a completed crawl request in various formats (default JSON, graph for visualization, or markdown).
+
+<img src="./_assets/Sitemap-params.png" width="300">
 
 ## Installation  
 To install the WaterCrawl plugin, follow these steps:

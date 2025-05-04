@@ -1,4 +1,4 @@
-version: 0.3.2
+version: 0.4.0
 type: plugin
 author: watercrawl
 name: watercrawl
@@ -28,7 +28,7 @@ plugins:
   tools:
     - provider/water-crawl.yaml
 meta:
-  version: 0.3.2
+  version: 0.4.0
   arch:
     - amd64
     - arm64
