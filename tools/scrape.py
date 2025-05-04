@@ -6,15 +6,17 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 from tools.base import WaterCrawlBaseMixin
 
 
-class ScrapTool(WaterCrawlBaseMixin, Tool):
+class ScrapeTool(WaterCrawlBaseMixin, Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
-        format = tool_parameters.get('format') or "markdown"
+        include_html = tool_parameters.get("include_html", False)
+        make_screenshot = tool_parameters.get("make_screenshot", False)
+        return_json = tool_parameters.get("return_json", False)
         include_links = tool_parameters.get("include_links", False)
         timeout = tool_parameters.get("timeout", 15000)
         wait_time = tool_parameters.get("wait_time", 1000)
         actions = []
 
-        if format == 'screenshot':
+        if make_screenshot:
             actions.append({
                 'type': 'screenshot',
             })
@@ -23,7 +25,7 @@ class ScrapTool(WaterCrawlBaseMixin, Tool):
             url=tool_parameters["url"],
             download=True,
             page_options={
-                'include_html': format == 'html',
+                'include_html': include_html,
                 'include_links': include_links,
                 'timeout': timeout,
                 'wait_time': wait_time,
@@ -37,28 +39,31 @@ class ScrapTool(WaterCrawlBaseMixin, Tool):
             )
             return
 
-        self.create_json_message(
-            response
-        )
+        if return_json:
+            yield self.create_json_message(
+                response
+            )
 
         result = response.pop('result')
         markdown = result.get('markdown')
         html = result.get('html')
 
-        if format == 'markdown' and markdown:
-            yield self.create_text_message(markdown)
-            if include_links:
-               self.create_text_message("\n".join(result['links']))
-            return
-        elif format == 'html' and html:
-            yield self.create_text_message(html)
-            return
-        elif format == 'screenshot':
-            for attachment in response['attachments']:
-                yield self.create_link_message(attachment['attachment'])
-            return
-        else:
-            yield self.create_json_message(
-                result
+        yield self.create_variable_message(
+            'markdown', markdown or ''
+        )
+
+        if include_html:
+            yield self.create_variable_message(
+                'html', html or ''
             )
-            return
+
+        if include_links:
+            yield self.create_variable_message(
+                'links', result.get('links') or []
+            )
+
+        if make_screenshot:
+            for attachment in response['attachments']:
+                yield self.create_image_message(
+                    attachment['attachment']
+                )

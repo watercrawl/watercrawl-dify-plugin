@@ -30,7 +30,7 @@ parameters:
   name: url
   required: true
   type: string
-- form: form
+- form: llm
   human_description:
     en_US: If you choose not to wait, it will directly return a crawl request json object. You can use
       this object uuid to check the crawling results or cancel the crawling task, which

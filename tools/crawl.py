@@ -8,7 +8,7 @@ from requests import HTTPError
 from tools.base import WaterCrawlBaseMixin
 
 
-class ScrapTool(WaterCrawlBaseMixin, Tool):
+class CrawlTool(WaterCrawlBaseMixin, Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         wait_for_results = tool_parameters.get('wait_for_results', True)
         extra_headers = {}

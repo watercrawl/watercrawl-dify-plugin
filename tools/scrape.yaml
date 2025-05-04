@@ -2,11 +2,11 @@ identity:
   name: WaterCrawlScrap
   author: watercrawl
   label:
-    en_US: Scrap Single URL
+    en_US: Scrape Single URL
 description:
   human:
     en_US: Transform a url to LLM ready text
-  llm: This tool is designed to scrap a single URL and output the content in selected format. The format can be markdown, html, json, or screenshot. If you choose screenshot, the output will be a screenshot of the page.
+  llm: This tool is designed to scrape a single URL and output the content in selected format. The format can be markdown, html, json, or screenshot. If you choose screenshot, the output will be a screenshot of the page.
 parameters:
   - form: llm
     name: url
@@ -15,32 +15,40 @@ parameters:
     label:
       en_US: URL
     human_description:
-      en_US: Enter the URL you want to scrap
+      en_US: Enter the URL you want to scrape
     llm_description: The URL of the website that needs to be crawled. This is a required parameter.
 
   - form: llm
-    name: format
-    type: select
-    options:
-      - label:
-          en_US: Markdown
-        value: markdown
-      - label:
-          en_US: HTML
-        value: html
-      - label:
-          en_US: JSON
-        value: json
-      - label:
-          en_US: Screenshot
-        value: screenshot
-    default: markdown
+    name: include_html
+    type: boolean
+    default: false
     required: false
     label:
-      en_US: Format
+      en_US: Include HTML
     human_description:
-      en_US: Choose the format of the output
-    llm_description: The format of the output, such as markdown, html, or json. if you choose screenshot, the output will be a screenshot of the page. try to use markdown for most of the time.
+      en_US: Include HTML in the output
+    llm_description: Whether to include HTML in the output this HTML extracted from the page.
+
+  - form: llm
+    name: make_screenshot
+    type: boolean
+    default: false
+    required: false
+    label:
+      en_US: Make Screenshot
+    human_description:
+      en_US: Make Screenshot of the page
+    llm_description: Whether to make a screenshot of the page.
+
+  - form: llm
+    name: return_json
+    type: boolean
+    default: false
+    required: false
+    label:
+      en_US: Return JSON
+    human_description:
+      en_US: Return JSON in the output
 
   - form: llm
     name: include_links
@@ -75,6 +83,18 @@ parameters:
       en_US: After opening the page, wait for the page to load for the specified time
     llm_description: The timeout for waiting for the page to load, in milliseconds. Default is 1000ms.
 
+output_schema:
+  type: object
+  properties:
+    html:
+      type: string
+      description: The HTML content of the page.
+    markdown:
+      type: string
+    links:
+      type: array
+      items:
+        type: string
 extra:
   python:
-    source: tools/scrap.py
+    source: tools/scrape.py
