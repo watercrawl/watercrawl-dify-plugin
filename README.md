@@ -1,13 +1,13 @@
 # WaterCrawl Plugin
 
 **Author:** watercrawl  
-**Version:** 0.4.0
+**Version:** 0.5.0
 **Type:** Tool  
 
 <img src="./_assets/Introduction.png" width="300">
 
 ### Description  
-WaterCrawl is a powerful web crawling tool designed for developers. This plugin allows you to easily crawl websites, extract data, and search the web. It is compatible with WaterCrawl v0.4.* and offers a range of features for efficient data extraction and discovery.
+WaterCrawl is a powerful web crawling tool designed for developers. This plugin allows you to easily crawl websites, extract data, and search the web. It is compatible with WaterCrawl v0.9.* and offers a range of features for efficient data extraction and discovery.
 
 ## Features  
 #### **Scrape Tool**:
@@ -26,7 +26,7 @@ Initiates a web crawl to extract data from specified URLs with configurable opti
 | --- | --- |
 
 ### **Crawl Job Tool**: 
-Retrieve scraping results based on a crawl request UUID and cancel ongoing scraping tasks.  
+Manage crawl jobs using a crawl request UUID. You can retrieve the job status, get all results, fetch a single result by its UUID, or cancel an ongoing task.  
 
 <img src="./_assets/Crawl-job-params.png" width="300">
 
@@ -36,12 +36,12 @@ Search the web for information using WaterCrawl's search API with configurable o
 <img src="./_assets/Search-params.png" width="300">
 
 ### **Search Job Tool**:
-Retrieve search results or manage search jobs based on a search request UUID. Monitor progress or cancel search tasks as needed.
+Retrieve search results or manage search jobs based on a search request UUID. You can get the status and results of a search, or cancel it.
 
 <img src="./_assets/Search-job-params.png" width="300">
 
 ### **Sitemap Tool**:
-Retrieve a sitemap from a completed crawl request in various formats (default JSON, graph for visualization, or markdown).
+Generates a sitemap directly from a URL. You can configure it to include subdomains, ignore existing sitemap.xml files, and more.
 
 <img src="./_assets/Sitemap-params.png" width="300">
 

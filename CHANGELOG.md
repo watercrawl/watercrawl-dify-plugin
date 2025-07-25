@@ -1,5 +1,22 @@
 # Changelog
 
+## [v0.5.0] - 2025-07-25
+### Added
+- **New Sitemap Tool**: Introduced a new `sitemap` tool to generate a sitemap directly from a URL, with options to include subdomains, ignore `sitemap.xml`, and filter by search terms.
+- **Get Single Crawl Result**: The `crawl_job` tool now supports a `get_result` operation to fetch a single crawl result by its UUID.
+
+### Changed
+- **Plugin Version**: Updated plugin version to `0.5.0` and declared compatibility with WaterCrawl `v0.9.*`.
+- **Deprecated Sitemap Tool**: The previous `sitemap` tool, which operated on completed crawl requests, has been deprecated in favor of the new, more direct sitemap generation tool.
+- **Enhanced Tool Feedback**:
+    - `crawl`: Now provides richer, real-time feedback, including the crawl request object, a running summary, and final results.
+    - `crawl_job`: The `get` operation now returns a concise text summary of the job status.
+    - `scrape`: Now outputs the full JSON response, the extracted markdown, and optional HTML for better usability.
+    - `search`: Now returns a clear text summary of the search parameters and results.
+    - `search_job`: The `get` operation now includes a text summary of the job status and any available results.
+- **Simplified Search Job**: The `search_job` tool's `monitor` option has been removed for a cleaner interface; the `get` operation now provides all necessary information.
+
+
 ## [v0.4.0] - 2025-05-04
 ### Added
 - **Search Tool**: Search the web for information using WaterCrawl's search API with configurable options for language, country, time range, and search depth.
