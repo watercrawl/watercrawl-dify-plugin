@@ -95,6 +95,38 @@ output_schema:
       type: array
       items:
         type: string
+    output:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: A unique identifier for the crawl result.
+        url:
+          type: string
+          format: uri
+          description: The URL that was crawled.
+        result:
+          type: object
+          properties:
+            metadata:
+              type: object
+              description: Metadata extracted from the webpage's head section.
+              additionalProperties:
+                type: string
+            markdown:
+              type: string
+              description: The content of the webpage converted to Markdown format.
+            links:
+              type: array
+              description: A list of all unique links found on the webpage.
+              items:
+                type: string
+                format: uri
+            html:
+              type: string
+              description: The full HTML content of the crawled webpage.
+
 extra:
   python:
     source: tools/scrape.py

@@ -16,6 +16,7 @@ tools:
   - tools/search.yaml
   - tools/search_job.yaml
   - tools/sitemap.yaml
+  - tools/sitemap_request.yaml
 extra:
   python:
     source: provider/water-crawl.py

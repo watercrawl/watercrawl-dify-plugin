@@ -43,6 +43,7 @@ class ScrapeTool(WaterCrawlBaseMixin, Tool):
             yield self.create_json_message(
                 response
             )
+        yield self.create_variable_message('output', response)
 
         result = response.pop('result')
         markdown = result.get('markdown')
@@ -50,6 +51,10 @@ class ScrapeTool(WaterCrawlBaseMixin, Tool):
 
         yield self.create_variable_message(
             'markdown', markdown or ''
+        )
+
+        yield self.create_text_message(
+            markdown or ''
         )
 
         if include_html:

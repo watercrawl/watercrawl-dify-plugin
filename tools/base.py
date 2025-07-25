@@ -8,7 +8,7 @@ class WaterCrawlBaseMixin:
     def client(self) -> WaterCrawlAPIClient:
         return WaterCrawlAPIClient(
             self.runtime.credentials["api_key"],
-            self.runtime.credentials["base_url"] or "https://app.watercrawl.dev/",
+            self.runtime.credentials.get("base_url", None) or "https://app.watercrawl.dev/",
         )
 
     def get_safe_array(self, params, key):

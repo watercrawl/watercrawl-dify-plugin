@@ -9,7 +9,7 @@ extra:
 identity:
   author: watercrawl
   label:
-    en_US: Sitemap
+    en_US: Sitemap for Crawl Request - (Deprecated)
     zh_Hans: 网站地图
   name: sitemap
 parameters:

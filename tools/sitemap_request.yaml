@@ -1,0 +1,57 @@
+description:
+  human:
+    en_US: Retrieve the sitemap from a URL.
+    zh_Hans: 从URL获取网站地图。
+  llm: This tool retrieves the sitemap data from a URL. You can get the sitemap in different formats - as a standard data structure, as a graph for visualization, or as markdown content.
+extra:
+  python:
+    source: tools/sitemap_request.py
+identity:
+  author: watercrawl
+  label:
+    en_US: Sitemap
+    zh_Hans: 网站地图请求
+  name: sitemap_request
+parameters:
+  - form: llm
+    human_description:
+      en_US: Enter the URL to get its sitemap.
+      zh_Hans: 输入URL以获取其网站地图。
+    label:
+      en_US: URL
+      zh_Hans: URL
+    llm_description: The URL for which to retrieve the sitemap. This is a required parameter.
+    name: url
+    required: true
+    type: string
+  - form: llm
+    human_description:
+      en_US: Include subdomains.
+      zh_Hans: 包含子域名。
+    label:
+      en_US: Include subdomains
+      zh_Hans: 包含子域名
+    name: include_subdomains
+    type: boolean
+    default: true
+  - form: llm
+    human_description:
+      en_US: Ignore Sitemap.xml file.
+      zh_Hans: 忽略Sitemap.xml文件。
+    label:
+      en_US: Ignore Sitemap.xml
+      zh_Hans: 忽略Sitemap.xml
+    name: ignore_sitemap_xml
+    type: boolean
+    default: false
+  - form: llm
+    human_description:
+      en_US: Search term
+      zh_Hans: 搜索词
+    label:
+      en_US: Search term
+      zh_Hans: 搜索词
+    name: search
+    type: string
+
+

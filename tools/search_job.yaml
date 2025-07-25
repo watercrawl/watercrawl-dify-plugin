@@ -35,16 +35,12 @@ parameters:
   name: operation
   options:
   - label:
-      en_US: Get search status
+      en_US: Get search status + results
       zh_Hans: 获取搜索状态
     value: get
   - label:
       en_US: Cancel search job
       zh_Hans: 取消搜索任务
     value: cancel
-  - label:
-      en_US: Monitor search progress
-      zh_Hans: 监控搜索进度
-    value: monitor
   required: true
   type: select

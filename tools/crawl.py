@@ -56,16 +56,23 @@ class CrawlTool(WaterCrawlBaseMixin, Tool):
 
             raise e
 
+        yield self.create_variable_message('crawl_request', crawl_request)
         if not wait_for_results:
             yield self.create_json_message(
                 crawl_request
             )
+            summary = 'Crawl started with crawl uuid {}'.format(crawl_request['uuid'])
+            yield self.create_variable_message(
+                'summary',
+                summary
+            )
+            yield self.create_text_message(summary)
             return
 
         crawl_request['results'] = []
         for result in self.client.monitor_crawl_request(
-            item_id=crawl_request['uuid'],
-            download=True
+                item_id=crawl_request['uuid'],
+                download=True
         ):
             if result['type'] == 'result':
                 crawl_request['results'].append(result['data'])
@@ -73,4 +80,23 @@ class CrawlTool(WaterCrawlBaseMixin, Tool):
         yield self.create_json_message(
             crawl_request
         )
-        
+        yield self.create_variable_message(
+            'results',
+            crawl_request['results']
+        )
+
+        summary = 'Crawled {} pages with crawl uuid {}'.format(
+            len(crawl_request['results']),
+            crawl_request['uuid']
+        )
+        for result in crawl_request['results']:
+            summary += '\n- [{}]({}) - result uuid {}'.format(
+                result['result']['metadata']['title'],
+                result['url'],
+                result['uuid']
+            )
+        yield self.create_variable_message(
+            'summary',
+            summary
+        )
+        yield self.create_text_message(summary)

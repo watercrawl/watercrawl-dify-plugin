@@ -10,7 +10,7 @@ from tools.api import WaterCrawlAPIClient
 
 class WaterCrawlProvider(ToolProvider):
     def _validate_credentials(self, credentials: dict[str, Any]) -> None:
-        base_url = credentials["base_url"] or "https://app.watercrawl.dev/"
+        base_url = credentials.get('base_url', None) or 'https://app.watercrawl.dev/'
 
         if not self.validate_url(base_url):
             raise ToolProviderCredentialValidationError("Invalid base URL")
@@ -34,12 +34,12 @@ class WaterCrawlProvider(ToolProvider):
     def validate_url(self, url):
         try:
             regex = re.compile(
-                    r'^(https?:\/\/)+' # http:// or https://
-                    r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
-                    r'localhost|' #localhost...
-                    r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
-                    r'(?::\d+)?' # optional port
-                    r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+                r'^(https?:\/\/)+'  # http:// or https://
+                r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
+                r'localhost|'  # localhost...
+                r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
+                r'(?::\d+)?'  # optional port
+                r'(?:/?|[/?]\S+)$', re.IGNORECASE)
             return url if bool(re.match(regex, url)) else None
         except Exception:
             return False

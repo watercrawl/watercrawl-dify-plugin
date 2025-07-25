@@ -195,3 +195,38 @@ parameters:
   name: include_links
   type: boolean
   default: false
+output_schema:
+  type: object
+  properties:
+    crawl_request:
+      type: object
+      description: The original crawl request.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier for the crawl job.
+        url:
+          type: string
+          format: uri
+          description: The primary URL for the crawl.
+        status:
+          type: string
+          description: The current status of the crawl job.
+        duration:
+          type: number
+          nullable: true
+          description: The duration of the crawl in seconds (null if not completed).
+        number_of_documents:
+          type: integer
+          minimum: 0
+          description: The number of documents processed during the crawl.
+    results:
+      type: array
+      description: An array of crawl results.
+      items:
+        type: object
+        description: A single crawl result.
+    summary:
+      type: string
+      description: A summary of the crawl job.

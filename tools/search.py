@@ -11,7 +11,7 @@ class SearchTool(WaterCrawlBaseMixin, Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         wait_for_results = tool_parameters.get('wait_for_results', True)
         result_limit = tool_parameters.get('result_limit', 5)
-        
+
         search_options = {
             'language': tool_parameters.get('language'),
             'country': tool_parameters.get('country'),
@@ -19,10 +19,10 @@ class SearchTool(WaterCrawlBaseMixin, Tool):
             'search_type': tool_parameters.get('search_type', 'web'),
             'depth': tool_parameters.get('depth', 'basic')
         }
-        
+
         # Remove None values
         search_options = {k: v for k, v in search_options.items() if v}
-        
+
         try:
             search_request = self.client.create_search_request(
                 query=tool_parameters["query"],
@@ -39,11 +39,23 @@ class SearchTool(WaterCrawlBaseMixin, Tool):
                         'response': e.response.json()
                     }
                 )
+                yield self.create_text_message(
+                    f"Something went wrong, status code: {e.response.status_code}, response: {e.response.content}")
                 return
-            
+
             raise e
-        
+
         yield self.create_json_message(
             search_request
         )
-
+        text_summary = f"Search uuid: {search_request['uuid']}"
+        text_summary += f"\nStatus: {search_request['status']}"
+        text_summary += f"\nQuery: {search_request['query']}"
+        if wait_for_results and search_request['result']:
+            text_summary += f"\nNumber of results: {len(search_request['result'])}"
+            text_summary += "\n\n-----\nResults:"
+            for result in search_request['result']:
+                text_summary += f"\nTitle: {result['title']}"
+                text_summary += f"\nURL: {result['url']}"
+                text_summary += f"\nDescription: {result['description']}"
+        yield self.create_text_message(text_summary)
